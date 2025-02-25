@@ -24,23 +24,25 @@
                 <button id="validateBtn">Validate Usernames</button>
             </div>
 
-            <div class="results-section">
+            <div id="progress" class="progress-container" style="display: none;">
+                <div class="progress-spinner"></div>
+                <p>Validating usernames...</p>
+            </div>
+
+            <div id="resultsSection" class="results-section" style="display: none;">
                 <h2>Results</h2>
                 <div class="tabs">
                     <button class="tab-btn active" data-tab="valid">Valid Usernames</button>
                     <button class="tab-btn" data-tab="invalid">Invalid Usernames</button>
                 </div>
+                
                 <div class="tab-content">
                     <div id="validResults" class="tab-pane active">
-                        <div class="copy-section">
-                            <button class="copy-btn" data-target="validResults">Copy All</button>
-                        </div>
+                        <button class="copy-btn" data-target="validResults">Copy All</button>
                         <div class="results-list"></div>
                     </div>
                     <div id="invalidResults" class="tab-pane">
-                        <div class="copy-section">
-                            <button class="copy-btn" data-target="invalidResults">Copy All</button>
-                        </div>
+                        <button class="copy-btn" data-target="invalidResults">Copy All</button>
                         <div class="results-list"></div>
                     </div>
                 </div>

@@ -232,3 +232,95 @@ footer a:hover {
     padding: 1rem;
     min-height: 100px;
 }
+
+.progress-container {
+    text-align: center;
+    padding: 2rem;
+    background: white;
+    border-radius: 6px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12);
+    margin-bottom: 2rem;
+}
+
+.progress-spinner {
+    width: 40px;
+    height: 40px;
+    border: 3px solid #f3f3f3;
+    border-top: 3px solid var(--primary-color);
+    border-radius: 50%;
+    margin: 0 auto 1rem;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.results-table {
+    width: 100%;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+.result-item {
+    display: grid;
+    grid-template-columns: 60px 2fr 1fr;
+    border-bottom: 1px solid var(--border-color);
+    padding: 0.75rem 0;
+    align-items: center;
+    background: white;
+}
+
+#invalidResults .result-item {
+    grid-template-columns: 3fr 1fr;
+}
+
+.result-item:last-child {
+    border-bottom: none;
+}
+
+.result-item img {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    margin: 0 auto;
+}
+
+.result-item .username {
+    padding: 0 1rem;
+}
+
+.result-item .status {
+    padding: 0 1rem;
+}
+
+.copy-btn {
+    display: none;
+    margin-bottom: 1rem;
+    background: #0366d6;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.9rem;
+}
+
+.tab-pane.active .copy-btn {
+    display: block;
+}
+
+.copy-buttons {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+    justify-content: center;
+}
+
+.copy-btn {
+    background: #0366d6;
+    font-size: 0.9rem;
+    padding: 0.5rem 1rem;
+}

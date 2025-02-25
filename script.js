@@ -3,33 +3,31 @@ document.addEventListener('DOMContentLoaded', () => {
     const validateBtn = document.getElementById('validateBtn');
     const validResultsList = document.querySelector('#validResults .results-list');
     const invalidResultsList = document.querySelector('#invalidResults .results-list');
+    const progressContainer = document.getElementById('progress');
+    const resultsSection = document.getElementById('resultsSection');
     const tabButtons = document.querySelectorAll('.tab-btn');
     const tabPanes = document.querySelectorAll('.tab-pane');
-    const copyButtons = document.querySelectorAll('.copy-btn');
 
     // Tab switching
     tabButtons.forEach(button => {
         button.addEventListener('click', () => {
             const tabId = button.getAttribute('data-tab');
-            
-            // Update active states
             tabButtons.forEach(btn => btn.classList.remove('active'));
             tabPanes.forEach(pane => pane.classList.remove('active'));
-            
             button.classList.add('active');
             document.getElementById(tabId + 'Results').classList.add('active');
         });
     });
 
-    // Copy functionality
-    copyButtons.forEach(button => {
+    // Copy functionality for active tab only
+    document.querySelectorAll('.copy-btn').forEach(button => {
         button.addEventListener('click', () => {
             const targetId = button.getAttribute('data-target');
-            const textToCopy = Array.from(document.querySelector(`#${targetId} .results-list`).children)
-                .map(item => item.querySelector('.username').textContent)
+            const usernames = Array.from(document.querySelector(`#${targetId} .results-list`).children)
+                .map(item => item.querySelector('.username').textContent.trim())
                 .join('\n');
             
-            navigator.clipboard.writeText(textToCopy).then(() => {
+            navigator.clipboard.writeText(usernames).then(() => {
                 const originalText = button.textContent;
                 button.textContent = 'Copied!';
                 setTimeout(() => {
@@ -50,6 +48,9 @@ document.addEventListener('DOMContentLoaded', () => {
         validateBtn.disabled = true;
         validResultsList.innerHTML = '';
         invalidResultsList.innerHTML = '';
+        
+        progressContainer.style.display = 'block';
+        resultsSection.style.display = 'none';
 
         for (const username of usernames) {
             try {
@@ -59,22 +60,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 if (response.ok) {
                     const userData = await response.json();
-                    resultItem.classList.add('valid');
                     resultItem.innerHTML = `
                         <img src="${userData.avatar_url}" alt="${username}'s avatar">
-                        <div class="result-info">
-                            <div class="username">${username}</div>
-                            <div class="status valid">✓ Valid username</div>
-                        </div>
+                        <div class="username">${username}</div>
+                        <div class="status valid">✓ Valid</div>
                     `;
                     validResultsList.appendChild(resultItem);
                 } else {
-                    resultItem.classList.add('invalid');
                     resultItem.innerHTML = `
-                        <div class="result-info">
-                            <div class="username">${username}</div>
-                            <div class="status invalid">✕ Invalid username</div>
-                        </div>
+                        <div class="username">${username}</div>
+                        <div class="status invalid">✕ Invalid</div>
                     `;
                     invalidResultsList.appendChild(resultItem);
                 }
@@ -83,6 +78,15 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
 
+        progressContainer.style.display = 'none';
+        resultsSection.style.display = 'block';
         validateBtn.disabled = false;
+
+        // Switch to the tab that has results
+        if (validResultsList.children.length > 0) {
+            document.querySelector('[data-tab="valid"]').click();
+        } else if (invalidResultsList.children.length > 0) {
+            document.querySelector('[data-tab="invalid"]').click();
+        }
     });
 });
