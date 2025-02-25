@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GitHub Username Validator</title>
+    <link rel="icon" href="https://github.com/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>GitHub Username Validator</h1>
+        </header>
+        
+        <main>
+            <div class="input-section">
+                <textarea 
+                    id="usernameInput" 
+                    placeholder="Enter GitHub usernames (comma-separated or one per line) to validate them&#10;&#10;e.g., octocat, torvalds&#10;or&#10;octocat,torvalds,microsoftbot"
+                    rows="6"
+                ></textarea>
+                <button id="validateBtn">Validate Usernames</button>
+            </div>
+
+            <div class="results-section">
+                <h2>Results</h2>
+                <div class="tabs">
+                    <button class="tab-btn active" data-tab="valid">Valid Usernames</button>
+                    <button class="tab-btn" data-tab="invalid">Invalid Usernames</button>
+                </div>
+                <div class="tab-content">
+                    <div id="validResults" class="tab-pane active">
+                        <div class="copy-section">
+                            <button class="copy-btn" data-target="validResults">Copy All</button>
+                        </div>
+                        <div class="results-list"></div>
+                    </div>
+                    <div id="invalidResults" class="tab-pane">
+                        <div class="copy-section">
+                            <button class="copy-btn" data-target="invalidResults">Copy All</button>
+                        </div>
+                        <div class="results-list"></div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <footer>
+            <a href="https://github.com/yashrajnayak/check-gh-username" target="_blank">View on GitHub</a>
+        </footer>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
